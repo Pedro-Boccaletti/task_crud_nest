@@ -11,9 +11,18 @@ datasource db {
 }
 
 model Task {
-  id String @id @default(uuid())
-  title String
+  id          String    @id @default(uuid())
+  title       String
   description String?
-  time DateTime?
-  allDay Boolean @default(false)
+  time        DateTime?
+  allDay      Boolean   @default(false)
+}
+
+model User {
+  id        String  @id @default(uuid())
+  userName  String
+  firstName String
+  lastName  String?
+  email     String
+  password  String
 }
