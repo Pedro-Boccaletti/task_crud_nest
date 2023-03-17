@@ -7,7 +7,6 @@ import {
   Patch,
   Delete,
 } from '@nestjs/common';
-import { Task } from '@prisma/client';
 import { CreateTaskDto } from './dto/create-task.dto';
 import { UpdateTaskDto } from './dto/update-task.dto';
 import { TaskService } from './task.service';
