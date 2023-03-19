@@ -1,4 +1,3 @@
-import { PartialType } from '@nestjs/mapped-types';
 import {
   IsAlpha,
   IsAlphanumeric,
@@ -6,15 +5,9 @@ import {
   IsNotEmpty,
   IsOptional,
   IsStrongPassword,
-  IsUUID,
 } from 'class-validator';
-import { CreateUserDto } from './create-user.dto';
 
-export class UpdateUserDto extends PartialType(CreateUserDto) {
-  @IsUUID()
-  @IsNotEmpty()
-  id: string;
-
+export class UpdateUserDto {
   @IsNotEmpty()
   @IsAlphanumeric()
   userName: string;

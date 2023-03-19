@@ -4,14 +4,9 @@ import {
   IsNotEmpty,
   IsOptional,
   IsString,
-  IsUUID,
 } from 'class-validator';
 
 export class UpdateTaskDto {
-  @IsUUID()
-  @IsNotEmpty()
-  id: string;
-
   @IsString()
   title: string;
 
