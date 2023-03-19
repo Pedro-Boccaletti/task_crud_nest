@@ -1,26 +1,27 @@
+import { Transform } from 'class-transformer';
 import {
-  IsBoolean,
-  IsDateString,
+  IsDate,
   IsNotEmpty,
   IsOptional,
+  IsString,
   IsUUID,
 } from 'class-validator';
 
 export class CreateTaskDto {
   @IsNotEmpty()
+  @IsString()
   title: string;
 
   @IsOptional()
+  @IsString()
   description: string;
 
   @IsOptional()
-  @IsDateString()
-  time: string;
+  @Transform(({ value }) => new Date(value))
+  @IsDate()
+  time: Date;
 
-  @IsOptional()
-  @IsBoolean()
-  allDay: boolean;
-
+  @IsNotEmpty()
   @IsUUID()
   userId: string;
 }
