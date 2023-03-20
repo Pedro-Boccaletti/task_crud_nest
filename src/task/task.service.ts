@@ -12,6 +12,13 @@ export class TaskService {
     return tasks;
   }
 
+  async getAllByUser(id: string) {
+    const tasks = await this.prisma.task.findMany({
+      where: { userId: id },
+    });
+    return tasks;
+  }
+
   async insertTask(task: CreateTaskDto) {
     const createdTask = await this.prisma.task.create({
       data: task,

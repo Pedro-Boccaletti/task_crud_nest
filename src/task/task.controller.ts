@@ -26,6 +26,12 @@ export class TaskController {
     return tasks;
   }
 
+  @Get('user/:id')
+  async getAllByUser(@Param('id') id: string) {
+    const tasks = await this.taskService.getAllByUser(id);
+    return tasks;
+  }
+
   @Get(':id')
   findOne(@Param('id') id: string) {
     return this.taskService.findOne(id);
