@@ -21,7 +21,10 @@ export class TaskService {
 
   async insertTask(task: CreateTaskDto) {
     const createdTask = await this.prisma.task.create({
-      data: task,
+      data: {
+        ...task,
+        time: task.time ? new Date(task.time) : null,
+      },
     });
     return createdTask;
   }
@@ -34,7 +37,10 @@ export class TaskService {
   async update(id: string, task: UpdateTaskDto) {
     const updatedTask = await this.prisma.task.update({
       where: { id },
-      data: { ...task },
+      data: {
+        ...task,
+        time: task.time ? new Date(task.time) : null,
+      },
     });
     return updatedTask;
   }
