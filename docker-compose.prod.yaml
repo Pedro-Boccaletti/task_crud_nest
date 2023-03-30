@@ -1,0 +1,34 @@
+services:
+  backend:
+    build:
+      context: .
+      dockerfile: Dockerfile.prod
+    container_name: task-list_api 
+    env_file:
+      - ./.env
+
+    ports:
+      - "${PORT}:${PORT}"
+    depends_on:
+      postgres_db:
+        condition: service_healthy
+
+
+  postgres_db:
+    image: postgres:14.1-alpine
+    container_name: ${DB_HOST}
+    environment:
+      - POSTGRES_USER=$DB_USER
+      - POSTGRES_PASSWORD=$DB_PASSWORD
+    expose:
+      - 5432
+    volumes:
+      - db:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready"] # Deve aguardar o banco ficar operacional
+      interval: 10s
+      timeout: 5s
+      retries: 5
+
+volumes:
+  db:
