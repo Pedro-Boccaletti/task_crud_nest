@@ -32,6 +32,12 @@ export class TaskController {
     return tasks;
   }
 
+  @Get('user/:id/taskIds')
+  async getAllTasksIdsByUser(@Param('id') id: string) {
+    const tasks = await this.taskService.getAllTasksIdsByUser(id);
+    return tasks;
+  }
+
   @Get(':id')
   findOne(@Param('id') id: string) {
     return this.taskService.findOne(id);
