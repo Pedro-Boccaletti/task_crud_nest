@@ -7,10 +7,12 @@ COPY prisma ./prisma
 
 RUN yarn
 
+ENV PORT 8080
+
 COPY . .
 
-RUN yarn build
 RUN yarn prisma generate
+RUN yarn build
 
 FROM node:16.14-alpine
 
@@ -19,7 +21,5 @@ COPY --from=builder /app/node_modules ./node_modules
 COPY --from=builder /app/package.json /app/yarn.lock ./
 COPY --from=builder /app/dist ./dist
 COPY --from=builder /app/prisma ./prisma
-
-EXPOSE 8080
 
 CMD [ "/bin/sh", "./entrypoint.sh" ]
